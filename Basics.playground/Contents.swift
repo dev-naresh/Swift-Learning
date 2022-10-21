@@ -17,8 +17,6 @@ print("\(greeting)\n")
 //var (name,m1,m2,m3, _) = student
 var student: [(name:String,m1:Int,m2:Int,m3:Int)] = [("asdfg", 21, 21, 32),("asfg", 1, 1, 3)]
 
-
-
 print("\(student[1])\n")
 //print("Name: \(student.name)")
 //print("Subject1: \(student.m1)")
@@ -56,15 +54,11 @@ if let unwrappedName = nameOptional {
 let name: String? = nil
 print(name?.count ?? 0)
 
-
-
-
 if let actualNumber = Int8(possibleNumber) {
     print("The string \"\(possibleNumber)\" has an integer value of \(actualNumber)")
 } else {
     print("The string \"\(possibleNumber)\" couldn't be converted to an integer")
 }
-
 
 let myNumber = Int(possibleNumber)
 // Here, myNumber is an optional integer
@@ -73,11 +67,9 @@ if let myNumber = myNumber {
     print("My number is \(myNumber)")
 }
 
-
 if let firstNumber = Int("4"), let secondNumber = Int("42"), firstNumber < secondNumber , secondNumber < 100 {
     print("\(firstNumber) < \(secondNumber) < 100")
 }
-
 
 for name1 in -5..<2 {
     print(name1)
