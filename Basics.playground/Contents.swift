@@ -107,8 +107,129 @@ default:
 }
 print(description)
 
-//let nameguard: String? = nil
-//guard let unwrappedName = nameguard else {
-//    print("Ending..")
+
+
+func nameGuard(a:Int=3,b:Int){
+    let nameguard: String? = nil
+    guard let unwrappedName = nameguard else {
+        print("Ending..")
+        return
+    }
+    print(unwrappedName.count)
+}
+
+nameGuard(b:2)
+
+var customersInLine = ["Ewa", "Barry", "Daniella"]
+func serve(customer customerProvider: @autoclosure () -> Int) {
+    print("Now serving \(customerProvider())!")
+}
+serve(customer: customersInLine.count)
+
+
+enum Planet: Character {
+    case mercury = "a"//, venus, earth="c", mars, jupiter, saturn, uranus, neptune
+}
+
+var planet = Planet.mercury
+
+print(planet)
+
+
+//class Caller {
+//    var call:(()->Void )?
+//
+//
+////    func Caller(call1:()->Void){
+////        self.call! = call1
+////    }
 //}
-//print(unwrappedName.count)
+//
+//var cal = Caller()
+//cal.call! = {
+//    print("hello")
+//}
+//
+//var dd = cal.call!
+//
+//dd()
+
+
+func calculate(a: Int, b: Int? )-> Int {
+    return sub(a,b ?? 0)
+//    return a+b
+}
+
+func sub(_ a : Int, _ b: Int)-> Int {
+    return a-b
+}
+
+print(calculate(a:4,b:nil))
+
+for a in 1...10{
+    print(a)
+}
+
+//Class reference inside a array
+class Student {
+    var roll: Int
+    var name: String
+    
+    init(_ roll: Int, _ name: String){
+        self.roll = roll
+        self.name = name
+    }
+}
+
+//var student = Student(1, "naveen")
+
+var studentList : [Student] = []
+
+studentList.append(Student(1, "naveen"))
+
+print("\n\(studentList[0])")
+print(studentList[0].roll)
+print(studentList[0].name)
+
+
+//Structure object inside a set using hashable protocol
+struct Employee: Hashable {
+    var empId: Int
+    var name: String
+    
+    init(_ empId: Int, _ name: String){
+        self.empId = empId
+        self.name = name
+    }
+}
+
+var empList : Set<Employee> = Set()
+
+empList.insert(Employee(1, "naresh"))
+
+for emp in empList {
+    if emp.empId == 1 {
+        print(emp)
+    }
+}
+
+//enum Name  {
+//    case one
+//    case two
+//    case three
+//    case four
+//}
+//
+//var names = Name.two
+//
+//switch names {
+//
+//    case .one:
+//
+//    case .two:
+//
+//    case .three:
+//
+//    case .four:
+//}
+
