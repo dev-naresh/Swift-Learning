@@ -38,6 +38,7 @@ let inttotal = int1 + UInt32(int2)
 print(inttotal)
 
 //Optionals
+var a1: Optional<Int>
 
 if convertedNumber != nil {
     print("\nconvertedNumber has an integer value of \(convertedNumber!).")
@@ -85,8 +86,8 @@ let greeting1 = "Guten Tag!"
 
 print(greeting1.firstIndex(of: "e")!)
 
-var a1: [Any] = [4,"lajfldsa"]
-print(a1)
+var al: [Any] = [4,"lajfldsa"]
+print(al)
 
 var x:[Int] = [1,2,3,4,5]
 
@@ -165,6 +166,7 @@ func sub(_ a : Int, _ b: Int)-> Int {
 }
 
 print(calculate(a:4,b:nil))
+print("")
 
 for a in 1...10{
     print(a)
@@ -213,23 +215,190 @@ for emp in empList {
     }
 }
 
-//enum Name  {
-//    case one
-//    case two
-//    case three
-//    case four
+print("")
+
+//Enumeration example using the switch and fallthrough
+enum Name  {
+    case one
+    case two
+    case three
+    case four
+}
+
+var names = Name.two
+
+switch names {
+    case .one:
+        print("One")
+    case .two:
+        print("Two")
+        fallthrough
+    case .three:
+        print("Three")
+    case .four:
+        print("Four")
+}
+
+print("")
+
+var namesClo: [String] = ["Naveen", "Naresh", "Shobana", "Dhanu"]
+
+var reversedNames = namesClo.sorted(by: { s1, s2 in s1 < s2 })
+
+print(reversedNames)
+
+struct A: Equatable {
+    var i : Int
+    init(a : Int){
+        i = a
+    }
+}
+
+var aa = A(a:8)
+var b = A(a:8)
+
+print(aa == b)
+
+
+struct AB {
+    var a : Int
+    
+}
+var text: String?
+print(text ?? "xyz")
+
+
+class AAA {
+    static var num1 = 100
+}
+
+print(AAA.num1)
+
+
+
+
+class Person {
+    var residence: Residence? = Residence()
+}
+
+class Residence {
+    var numberOfRooms = 1
+}
+
+let john = Person()
+
+//let roomCount = john.residence!.numberOfRooms
+
+if let roomCount = john.residence?.numberOfRooms {
+    print("John's residence has \(roomCount) room(s).")
+} else {
+    print("Unable to retrieve the number of rooms.")
+}
+
+
+
+
+class Apple {
+    var features: Features?
+    
+    init(){
+//        features = Features(1)
+    }
+}
+
+class Features {
+    var data : Int = sdf()
+    
+    init?() {
+     //   self.data = sdf()
+        //data = self.setter
+    }
+    
+    static func sdf() -> Int {
+        return 9
+    }
+    
+    deinit {
+        print("Deinit")
+    }
+}
+
+
+//var feat :Features =
+class tempo {
+    var feat = Features()
+    
+//    guard let a = feat?.data else {
+//        print("dsjfla")
+//    }
+}
+
+print(tempo())
+//var feat1 = feat
+
+
+//feat.data = 5
+
+//print(feat?.data ?? 0 )
+
+//if(feat.data === feat1.data) {
+//    print("Success")
 //}
-//
-//var names = Name.two
-//
-//switch names {
-//
-//    case .one:
-//
-//    case .two:
-//
-//    case .three:
-//
-//    case .four:
+//else {
+//    print("Fail")
 //}
 
+//
+//if let a = feat?.data {
+//    print(a)
+//}
+//
+//print(feat?.data)
+
+
+
+var apple : Apple = Apple()
+
+
+var ay : Int?
+
+
+
+
+class Task {
+    var name : String
+    var task : String
+    var priority : Character
+    
+    init(  _ name : String, _ task : String, _ priority : Character){
+        self.name = name
+        self.task = task
+        self.priority = priority
+        print(name)
+    }
+    
+    func getTask() {
+        print(name)
+    }
+}
+
+class MainTask : Task{
+    var num : Int
+    override init(_ name : String, _ task : String, _ priority : Character){
+     
+        num = 1
+        super.init(name, task, priority)
+        
+    }
+    
+    var task1 = MainTask("nad", "azgfsz", "I")
+}
+
+class SubTask :Task{
+}
+
+
+
+func multi() {
+    
+}
