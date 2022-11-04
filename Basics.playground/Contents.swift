@@ -28,7 +28,7 @@ let possibleNumber = "123"
 let convertedNumber: Int? = nil
 //let convertedNumber = Int(possibleNumber)
 
-//print(convertedNumber? ?? 0)
+//print(convertedNumber ?? 0)
 
 let int1: UInt32 = 2_00
 let int2: UInt8 = 22
@@ -402,3 +402,23 @@ class SubTask :Task{
 func multi() {
     
 }
+
+
+//var int = Int()
+
+class Ah {
+    var n : Int = 0
+    
+    
+}
+
+class Bh {
+
+    var obj = Ah()
+//    func printd(){
+//        print(obj.n)
+//    }
+}
+
+
+

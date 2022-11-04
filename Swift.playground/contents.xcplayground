@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <playground version='6.0' target-platform='macos' buildActiveScheme='true' importAppTypes='true'>
     <pages>
-        <page name='Operators'/>
+        <page name='Collections '/>
         <page name='Basics '/>
+        <page name='Closures'/>
+        <page name='Properties'/>
     </pages>
 </playground>
