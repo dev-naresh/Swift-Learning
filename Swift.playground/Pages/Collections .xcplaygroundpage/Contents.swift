@@ -106,6 +106,86 @@ print("The remembered direction is \(rememberedDirection)")
 //}
 
 
+enum enumTemp {
+    case a, b, c
+    init?(char : Character) {
+        switch char {
+        case "a": self = .a
+        case "b": self = .b
+        case "c": self = .c
+        default : return nil
+        }
+    }
+}
+
+var aEnum = enumTemp(char: "d")
+
+print(aEnum ?? 0)
+
+
+//Failable delegation
+
+class FailTemp {
+    var a : Int
+    required init() {
+        self.a = 0
+    }
+    init?(_ a : Int, _ b : Int) {
+        self.a = a
+    }
+//    init(){
+//
+//    }
+}
+
+//class op {
+//
+//}
+//
+////extension op {
+////
+////
+////}
+
+class Fail2 : FailTemp {
+    required init() {
+        super.init()
+    }
+    
+    init?(_ a : Int) {
+        super.init(a , 0)
+    }
+    override init(_ a: Int, _ b: Int) {
+        super.init(a,b)!
+    }
+}
+
+var fail2 = Fail2(2)
+
+//print(Fail2(1)?.a ?? 0)
+print(fail2?.a ?? 0)
+
 //: [Next](@next)
 
+struct Num {
+    var num1 : Int
+    var num2 : Int
+    init(_ a :Int,_ b :Int){
+        num1 = a
+        num2 = b
+    }
+}
+//var a = 9
+var b = 4
 
+var nm : Num = {
+    var nu =  Num(1, 3)
+    nu.num2 = 900
+    return nu
+}()
+
+print(nm.num1,nm.num2)
+
+var clo : Void = {
+    print("Closure activated")
+}()

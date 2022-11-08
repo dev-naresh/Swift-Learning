@@ -25,6 +25,7 @@ import Foundation
 //compAc.comp = (a: 10,b: 6)
 //
 //print(compAc.comp.a)
+
 @propertyWrapper
 struct SmallNumber {
     private var number: Int
@@ -85,6 +86,37 @@ struct SizedRectangle {
 }
 
 var sizeRect = SizedRectangle()
+
+
+struct A {
+    var a : Int = 0
+//    {
+//        return 5
+//    }
+    
+    init() {
+        self.init(a: 5)
+    }
+    init(a:Int){
+        self.a = a
+    }
+}
+
+class B {
+    var a = A()
+    
+    func temo(){
+//        a.a = 5
+        print(a.a)
+    }
+    
+//    init() {
+//
+//    }
+}
+
+var b = B()
+b.temo()
 
 
 //: [Next](@next)

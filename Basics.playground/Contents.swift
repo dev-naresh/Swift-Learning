@@ -310,7 +310,7 @@ class Features {
     var data : Int = sdf()
     
     init?() {
-     //   self.data = sdf()
+//        self.data = sdf()
         //data = self.setter
     }
     
@@ -324,16 +324,21 @@ class Features {
 }
 
 
-//var feat :Features =
-class tempo {
-    var feat = Features()
-    
-//    guard let a = feat?.data else {
-//        print("dsjfla")
+var feat : Features? = Features()
+feat = nil
+//class tempo {
+//
+//
+//    func obj(){
+//        var feat = Features()
 //    }
-}
+////    guard let a = feat?.data else {
+////        print("dsjfla")
+////    }
+//}
 
-print(tempo())
+//print(tempo())
+
 //var feat1 = feat
 
 
@@ -419,6 +424,5 @@ class Bh {
 //        print(obj.n)
 //    }
 }
-
 
 
