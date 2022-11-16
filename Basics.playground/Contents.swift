@@ -307,14 +307,14 @@ class Apple {
 }
 
 class Features {
-    var data : Int = sdf()
+    lazy var data : Int = sdf()
     
-    init?() {
+//    init?() {
 //        self.data = sdf()
-        //data = self.setter
-    }
+//        data = self.setter
+//    }
     
-    static func sdf() -> Int {
+    func sdf() -> Int {
         return 9
     }
     
@@ -324,20 +324,22 @@ class Features {
 }
 
 
-var feat : Features? = Features()
-feat = nil
-//class tempo {
-//
-//
-//    func obj(){
-//        var feat = Features()
-//    }
-////    guard let a = feat?.data else {
-////        print("dsjfla")
-////    }
-//}
+var feat = Features()
 
-//print(tempo())
+print(feat.data)
+//feat = nil
+class tempo {
+//    weak var feat = Features()
+
+    func obj(){
+        
+    }
+//    guard let a = feat?.data else {
+//        print("dsjfla")
+//    }
+}
+
+var temp = tempo()
 
 //var feat1 = feat
 
@@ -414,15 +416,46 @@ func multi() {
 class Ah {
     var n : Int = 0
     
+    var comp : Int = 0{
+        didSet {
+            print("Didset")
+        }
+    }
+    
     
 }
 
-class Bh {
+class Bh : Ah{
 
     var obj = Ah()
+    
+    override init(){
+        obj.n = 8
+        obj.comp = 3
+        print(obj.n)
+        print(obj.comp)
+        
+    }
+    static var bh = Bh()
+    
 //    func printd(){
 //        print(obj.n)
 //    }
+    
+    
 }
 
+Bh.bh
+//if Bh.bh.obj is Ah {
+//    print("Success")
+//}
 
+class Temp{
+    var a : Int = 0
+}
+
+var tempa = Temp()
+
+var ax : Int =  {
+    return 5
+}()

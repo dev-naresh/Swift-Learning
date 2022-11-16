@@ -155,12 +155,12 @@ class Fail2 : FailTemp {
     init?(_ a : Int) {
         super.init(a , 0)
     }
-    override init(_ a: Int, _ b: Int) {
-        super.init(a,b)!
+    override init?(_ a: Int, _ b: Int) {
+        super.init(a,b)
     }
 }
 
-var fail2 = Fail2(2)
+var fail2 = Fail2(2,9)
 
 //print(Fail2(1)?.a ?? 0)
 print(fail2?.a ?? 0)

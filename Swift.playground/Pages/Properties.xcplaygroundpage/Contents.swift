@@ -58,6 +58,7 @@ var someStructure = SomeStructure()
 
 someStructure.someNumber = 4
 print(someStructure.$someNumber)
+print(someStructure.someNumber )
 // Prints "false"
 
 someStructure.someNumber = 55
@@ -88,27 +89,40 @@ struct SizedRectangle {
 var sizeRect = SizedRectangle()
 
 
-struct A {
+class A {
     var a : Int = 0
+    var b : Int = 5
 //    {
 //        return 5
 //    }
     
-    init() {
-        self.init(a: 5)
+    init(a : Int = 5, b : Int) {
+        self.a = a;
+        self.b = b;
     }
-    init(a:Int){
+    
+    init(_ a:Int){
         self.a = a
     }
 }
 
 class B {
-    var a = A()
     
-    func temo(){
-//        a.a = 5
-        print(a.a)
+    func temo(_ clo : () -> Int){
+//
+        
     }
+    
+    var ax : A = {
+        var a = A(b: 5)
+        return a
+    }()
+    
+    
+    
+    
+    
+    
     
 //    init() {
 //
@@ -116,7 +130,8 @@ class B {
 }
 
 var b = B()
-b.temo()
+
+//b.temo(b.ax)
 
 
 //: [Next](@next)

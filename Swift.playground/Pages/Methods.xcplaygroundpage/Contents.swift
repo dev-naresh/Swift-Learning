@@ -102,27 +102,21 @@ print(deltempc2.num1, deltempc2.num2, deltempc2.num3)
 class TempA {
     var a : Int?
     
-    init(_ a : Int) {
-        self.a = a
+    func m() {
+        print("M invoked")
     }
     
-    convenience init() {
-     //   self.a = 1
-        self.init(1)
-    }
-    
-    convenience init (_ a : Int , _ b :Int) {
-        print("con")
-        self.init()
-    }
 }
 
 class TempB : TempA{
     var num  : Int
     
-    override init(_ a : Int) {
+    init(_ a : Int) {
         self.num = 0
-        super.init(a)
+    }
+    
+    func x() {
+        
     }
 //    convenience override init(){
 //        //num = 0
@@ -130,11 +124,111 @@ class TempB : TempA{
 //    }
 }
 
-var tempb : TempB? = TempB(4)
+var tempb : TempA? = TempB(4)
+
+tempb?.m()
+
+var aAs : Int? = 9
+
+print(aAs as Any)
 
 print()
 
-print(tempb?.a ?? 0)
+var choice : (Int, Int) = (9, 4)
 
+switch choice {
+case let x :
+    print(x)
+    break
+case let ("f", y) as (String, Double) :
+    print()
+    break
+}
+
+class typeA {
+    func a(){
+        print("Super class")
+    }
+}
+
+class typeB : typeA {
+    func b() {
+        print("Sub Class")
+    }
+}
+
+var typea : typeA = typeB()
+
+typea as? typeB
+
+//let atype = typea as typeB
+
+//if let x = tempb as? TempB {
+//    print("S")
+//}
+//
+//print(tempb?.a ?? 0)
+
+struct sdfdfa {
+    
+}
+
+var saldfj : sdfdfa
+
+
+var arrA = [1,2,3] 
+var arrN = [4,5,5]
+
+var any : [Any] = [2, "k", typea]
+
+var anyobj : [AnyObject] = [typea]
+
+typea.a()
+if let m = typea as? typeB {
+    m.b()
+}
+
+
+protocol Aprot{
+    
+}
+
+protocol Bprot{
+    
+}
+
+extension Aprot {
+    func aprot(){
+        print("Hello")
+   }
+}
+
+class Aclass: Aprot {
+    
+}
+var acls = Aclass()
+
+
+extension Aclass {
+    func printable(){
+        print("Aclass")
+    }
+}
+acls.aprot()
+extension Array : Aprot where Element : Aprot {
+    func s(){
+        print("sdf")
+    }
+}
+var arr: [Aclass] = [Aclass(),Aclass(),Aclass()]
+
+arr.s()
+var arr2: [Any] = [1,2,3,4,Aclass()]
+
+struct Equal : Equatable {
+    static func ==(lhs: Equal, rhs: Equal) -> Bool{
+            return false
+    }
+}
 
 //: [Next](@next)

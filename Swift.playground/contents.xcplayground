@@ -6,6 +6,12 @@
         <page name='Closures'/>
         <page name='Properties'/>
         <page name='Methods'/>
-        <page name='Untitled Page'/>
+        <page name='Properties2'/>
+        <page name='Nested types'/>
+        <page name='Error handling'/>
+        <page name='Protocals'/>
+        <page name='Opaque types'/>
+        <page name='Access Control'/>
+        <page name='Test'/>
     </pages>
 </playground>

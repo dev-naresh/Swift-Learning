@@ -5,7 +5,7 @@ import Foundation
 @propertyWrapper
 struct Props {
     private var a : Int
-//    private(set) var projectedValue :
+    private(set) var projectedValue : Bool
     
     var wrappedValue : Int {
         get {
@@ -14,16 +14,27 @@ struct Props {
         set {
             if(newValue > 0){
                 a = newValue
+                projectedValue = true
             }
         }
     }
+//    var wrappedValue : String {
+//        get {
+//            return b
+//        }
+//        set {
+//                b = newValue
+//        }
+//    }
      
     init() {
         self.a = 0
+        projectedValue = false
     }
     
     init(_ a : Int) {
         self.a = a
+        projectedValue = true
     }
 }
 
@@ -36,8 +47,6 @@ var prop2 = Props2()
 prop2.a = -9
 
 print(prop2.a)
-
-
 
 struct Subscript {
     var arr : [Int] = [1]
@@ -84,51 +93,14 @@ print(num.b)
 num[num.arr] = [7,6]
 print(num[num.arr])
 
-
-
-//Error handling
-
-enum studentError : Error {
-    case rollNoErr, mobNoErr, stuNameErr
-}
-
-struct student {
-    var rollNo : Int
-    var stuName : String
-    var mobNo : Int
-    
-    func studentCheck() throws -> Int {
-        guard rollNo > 0 else {
-            throw studentError.rollNoErr
-        }
-        guard stuName != "" else {
-            throw studentError.stuNameErr
-        }
-        guard mobNo != 0 else {
-            throw studentError.mobNoErr
-        }
-        return 0
+extension Subscript {
+    init(_ a : Int) {
+        self.a = a
     }
 }
 
-var stu1 = student(rollNo: 9, stuName: "afsdlj", mobNo: 0)
+var b = Subscript(3)
 
-do {
-    try stu1.studentCheck()
-}
-catch studentError.rollNoErr{
-    print(studentError.rollNoErr)
-}
-catch studentError.stuNameErr{
-    print(studentError.stuNameErr)
-}
-catch studentError.mobNoErr{
-    print(studentError.mobNoErr)
-}
-
-
-var x = try? stu1.studentCheck()
-
-print(x ?? 0)
+print(b.a)
 
 //: [Next](@next)
