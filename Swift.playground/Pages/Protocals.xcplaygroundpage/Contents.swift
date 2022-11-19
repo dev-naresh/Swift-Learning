@@ -130,4 +130,50 @@ func returnObj<T>(_ a : T) -> some Na {
 
 print(returnObj(3))
 print(returnObj("naveen"))
+
+
+protocol exist {
+    
+}
+
+protocol exist2: exist {
+    
+}
+
+struct exist3 : exist2 {
+    
+}
+
+func existFunc() -> any exist {
+    return exist3()
+}
+
+func existGenericFunc <T: exist> (a: T) -> T {
+    return a
+}
+
+print(existFunc())
+print(existGenericFunc(a: exist3()))
 //: [Next](@next)
+
+
+protocol existing {
+    func exit ()
+}
+
+class existing2: existing {
+    final func exit() {
+        print("existing3")
+    }
+}
+class existing3 : existing2 {
+    override func exit(){
+        exit()
+    }
+    
+}
+
+//extension existing2: existing {
+//
+//}
+print(existing3() is existing)

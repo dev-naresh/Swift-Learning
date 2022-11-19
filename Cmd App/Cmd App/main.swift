@@ -79,6 +79,7 @@ mainWhile : while true {
     if let choiceIf = readLine() {
         choice = Int(choiceIf)
     }
+     
     switch choice {
     case 1: main.addStudent(rollNo: 3, name: "adsff", phnNo: "32424342")
     case 2: main.updateStudent(rollNo: 3, name: "adsff", phnNo: "32424342")

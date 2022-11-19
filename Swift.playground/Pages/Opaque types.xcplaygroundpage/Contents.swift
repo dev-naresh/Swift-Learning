@@ -121,3 +121,42 @@ print(A().a)
 
 //var cm : [some Card] = [MasterCard() , VisaCard()]
 //: [Next](@next)
+
+
+var mb : Int = 0 {
+    willSet {
+        print(mb)
+    }
+}
+
+mb = 10
+
+
+func temp () -> Int {
+    var step = 4
+    return step
+}
+
+
+//func stepCount (_ num : inout Int) {
+//
+//    num += temp()
+//}
+//
+//stepCount()
+
+var tempvar = 10
+var clo: (Int) -> Void = { s1 in
+    var s2 = s1
+    s2 += tempvar
+    print(s1)
+}
+
+
+
+func cloCheck (_ clo: /*@escaping*/ (Int) -> Void, _ temp: inout Int) {
+    clo(temp)
+//    escClo = clo
+}
+
+cloCheck(clo, &tempvar)

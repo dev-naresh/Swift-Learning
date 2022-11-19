@@ -232,3 +232,27 @@ struct Equal : Equatable {
 }
 
 //: [Next](@next)
+
+class Temp {
+    var a: Int
+    var b: Int
+    
+    init (_ a: Int, _ b: Int) {
+        self.a = a
+        self.b = b
+    }
+//    init (_ struc: AB) {
+//        self.a = struc.a
+//        self.b = struc.b
+//    }
+    convenience init (_ struc: AB) {
+        self.init(struc.a, struc.b)
+    }
+}
+
+struct AB {
+    var a = 3
+    var b = 4
+}
+
+var template = Temp(AB())
