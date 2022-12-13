@@ -72,14 +72,14 @@ struct StudentApi: Crud {
 var main = StudentApi()
 
 mainWhile : while true {
-    print("\nWelcome!!! \n1.Add student\n2.Update student\n3.Delete student\n4.Exit")
+    print("\nWelcome!!! \n1.Add student |*| 2.Update student |*| 3.Delete student |*| 4.Exit")
     print("Enter a choice: ", terminator: "")
     
     var choice: Int?
     if let choiceIf = readLine() {
         choice = Int(choiceIf)
     }
-     
+    
     switch choice {
     case 1: main.addStudent(rollNo: 3, name: "adsff", phnNo: "32424342")
     case 2: main.updateStudent(rollNo: 3, name: "adsff", phnNo: "32424342")
