@@ -133,7 +133,11 @@ print(returnObj("naveen"))
 
 
 protocol exist {
-    
+    var gety: String {get set}
+}
+
+struct existing: exist {
+    let gety: String
 }
 
 protocol exist2: exist {
@@ -166,6 +170,7 @@ class existing2: existing {
         print("existing3")
     }
 }
+
 class existing3 : existing2 {
     override func exit(){
         exit()

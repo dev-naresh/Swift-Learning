@@ -87,4 +87,34 @@ print(aaa.aa)
 //apro.zyx()
 
 
+//Memory safety
+
+func balance(_ x: inout Int, _ y: inout Int) {
+    let sum = x + y
+    x = sum / 2
+    y = sum - x
+}
+struct str {
+    var name : String
+    var point : Int
+}
+var s = str(name: "person1", point: 33)
+func kop(n : inout String , z : inout Int){
+    
+}
+func d(v : str)->str{
+    var l = v
+    kop(n: &l.name, z: &l.point)
+    return l
+}
+s = d(v: s)
+func balancechecking(){
+    var playerOneScore = 42
+    var playerTwoScore = 30
+    balance(&playerOneScore, &playerTwoScore)  // OK
+    balance(&playerOneScore, &playerOneScore)
+}
+
+balancechecking()
+
 //: [Next](@next)

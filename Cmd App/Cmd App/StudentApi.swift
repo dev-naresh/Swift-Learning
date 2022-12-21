@@ -13,3 +13,7 @@ struct Student: Hashable{
     var name: String
     var phnNo: String
 }
+
+public class StudentTest {
+    
+}

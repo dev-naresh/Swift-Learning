@@ -14,5 +14,6 @@
         <page name='Access Control'/>
         <page name='Test'/>
         <page name='ARC'/>
+        <page name='Async'/>
     </pages>
 </playground>

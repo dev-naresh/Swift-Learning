@@ -7,6 +7,8 @@
 
 import Foundation
 
+import SQLite3
+
 //import
 
 //print("Enter a name: ", terminator: "")
@@ -87,4 +89,9 @@ mainWhile : while true {
     case 4: break mainWhile
     default: print("Wrong choice\n")
     }
+}
+
+
+class StudentModule: StudentTest {
+    
 }

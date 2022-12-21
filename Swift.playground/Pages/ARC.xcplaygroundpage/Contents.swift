@@ -29,13 +29,15 @@ class Passenger {
 }
 
 var m27: Bus? = Bus("m27")
+var tick: Passenger = Passenger("asdf")
 //var xyz: Passenger? = Passenger("xyz")
 
-m27!.passenger = xyz
+m27!.passenger = nil
+tick.bus = nil
 //xyz!.bus = m27
-
-m27 = nil
-xyz = nil
+//
+//m27 = nil
+//xyz = nil
 
 
 
