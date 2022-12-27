@@ -112,7 +112,7 @@ func balancechecking(){
     var playerOneScore = 42
     var playerTwoScore = 30
     balance(&playerOneScore, &playerTwoScore)  // OK
-    balance(&playerOneScore, &playerOneScore)
+//    balance(&playerOneScore, &playerOneScore)
 }
 
 balancechecking()

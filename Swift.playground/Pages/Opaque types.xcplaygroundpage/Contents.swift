@@ -88,6 +88,8 @@ struct bn<T> : m {
     var le: Int = 0
 }
 
+var bnn: some m = bn(hh: "yenkay")
+
 func returnObj (_ a : Int) -> any m {
     bn(hh: a)
 }
@@ -160,3 +162,6 @@ func cloCheck (_ clo: /*@escaping*/ (Int) -> Void, _ temp: inout Int) {
 }
 
 cloCheck(clo, &tempvar)
+
+
+

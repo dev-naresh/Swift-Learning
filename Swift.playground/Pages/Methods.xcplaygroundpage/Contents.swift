@@ -152,14 +152,18 @@ class typeA {
 }
 
 class typeB : typeA {
-    func b() {
+    override func a() {
         print("Sub Class")
     }
 }
 
-var typea : typeA = typeB()
-
-typea as? typeB
+var typeb : typeA = typeB()
+var typea: typeA = typeA()
+typeb.a()
+typea.a()
+typea as typeA
+typeb.a()
+print(typea is typeA)
 
 //let atype = typea as typeB
 
@@ -184,8 +188,8 @@ var any : [Any] = [2, "k", typea]
 var anyobj : [AnyObject] = [typea]
 
 typea.a()
-if let m = typea as? typeB {
-    m.b()
+if let m = typeb as? typeB {
+    m.a()
 }
 
 

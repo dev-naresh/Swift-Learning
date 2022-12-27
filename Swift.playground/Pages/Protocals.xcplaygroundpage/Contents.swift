@@ -133,10 +133,10 @@ print(returnObj("naveen"))
 
 
 protocol exist {
-    var gety: String {get set}
+    var gety: String {get}
 }
 
-struct existing: exist {
+struct existance: exist {
     let gety: String
 }
 
@@ -145,7 +145,7 @@ protocol exist2: exist {
 }
 
 struct exist3 : exist2 {
-    
+    var gety: String = ""
 }
 
 func existFunc() -> any exist {
@@ -166,7 +166,7 @@ protocol existing {
 }
 
 class existing2: existing {
-    final func exit() {
+    func exit() {
         print("existing3")
     }
 }
@@ -175,10 +175,50 @@ class existing3 : existing2 {
     override func exit(){
         exit()
     }
-    
+
 }
 
 //extension existing2: existing {
 //
 //}
 print(existing3() is existing)
+
+
+
+//protocal as a type
+
+protocol UI {
+    var UIName: String {get}
+    func UILoad()
+}
+
+class UITest {
+    var UITester : UI?
+    
+    func UIPositive() {
+        if UITester is UI {
+            print("Success")
+        }
+        else {
+            print("Failure")
+        }
+    }
+}
+
+struct UIMod: UI {
+    var UIName: String
+    
+    func UILoad() {
+        print("Loadig...")
+    }
+
+struct UIMod2 {
+}
+
+var uiObj = UITest()
+var uiObj2 = UITest()
+
+uiObj.UITester = UIMod(UIName: "Homepage")
+uiObj.UIPositive()
+uiObj2.UITester = UIMod2()
+uiObj2.UIPositive()

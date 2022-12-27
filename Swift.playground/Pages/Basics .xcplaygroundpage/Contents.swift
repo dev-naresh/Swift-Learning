@@ -46,6 +46,7 @@ while let num = Int("5"), i <= num {
 var impOpt : String! = "Naresh"
 var unOpt : String = impOpt
 
+print(impOpt ?? 0)
 print(unOpt)
 
 //Assertion
@@ -56,6 +57,22 @@ print(unOpt)
 
 //assert(unOpt != "Naresh", "The given expression is false")
 //precondition(unOpt != "Naresh", "The given expression is false")
+
+
+
+class TestA {
+    var teststr: String = "asdcv"
+    var test: String {
+        return "Testing....A"
+    }
+}
+
+class TestB: TestA {
+//    override var teststr: String = "afdsfa"
+    override var test: String {
+        return "Testing....B"
+    }
+}
 
 
 

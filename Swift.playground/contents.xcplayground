@@ -15,5 +15,7 @@
         <page name='Test'/>
         <page name='ARC'/>
         <page name='Async'/>
+        <page name='Multithreading'/>
+        <page name='OperationQueue'/>
     </pages>
 </playground>

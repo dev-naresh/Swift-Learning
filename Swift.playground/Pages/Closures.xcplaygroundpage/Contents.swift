@@ -84,4 +84,23 @@ func temp(_ a : Int) {
 }
 
 temp(7)
+
+struct Student {
+    var name: String
+    var age: Int
+    var gender: Character
+}
+
+var student = [ Student(name: "a", age: 23, gender: "M"),
+                Student(name: "b", age: 33, gender: "F"),
+                Student(name: "c", age: 32, gender: "M"),
+                Student(name: "d", age: 19, gender: "F")]
+
+var num: [Int] = [1,2,3,4,5,7]
+
+print(student.filter{ $0.age > 20 })
+print(student.filter{ $0.gender == "F" })
+print(num.reduce(0, +))
+//print(student.sorted{ $0 < $1 })
+
 //: [Next](@next)
