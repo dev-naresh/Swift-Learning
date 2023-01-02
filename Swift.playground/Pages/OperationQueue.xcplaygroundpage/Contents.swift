@@ -7,6 +7,7 @@ class Test1Operation: Operation {
         if isCancelled {
             return
         }
+        print(test1.isExecuting)
         print("TestOperation1",Thread.isMainThread)
 //        sleep(2)
         for i in 1...3{
@@ -34,14 +35,28 @@ let opQueue: OperationQueue = OperationQueue()
 
 var test1 = Test1Operation()
 
+print(test1.isFinished)
+
 var operation = BlockOperation{
     print("BLOCKOPERATION...")
 }
-//DispatchQueue.main.async {
-//    operation.start()
+operation.addExecutionBlock {
+    for i in 0...10{
+        print("t")
+    }
+}
+//DispatchQueue.main.sync {
+    operation.start()
 //    print(Thread.isMainThread)
 //}
 ////test1.cancel()
+test1.completionBlock = {
+    print(test1.isFinished)
+print("CompletionBlock")
+}
+//print(test1.completionBlock)
+//test1.start()
+//print(test1.completionBlock)
 //test1.start()
 //sleep(2)
 //
@@ -52,28 +67,30 @@ var test2 = Test2Operation()
 //test1.cancel()
 //test2.cancel()
 test2.addDependency(test1)
-opQueue.addOperations([test1, test2], waitUntilFinished: false)
-//opQueue.addOperation {
-//    DispatchQueue.main.async {
-//        print("Async1 dispatch")
-//        test1.start()
-//    }
-//
-//}
-//opQueue.addOperation {
-//    DispatchQueue.main.async {
-//        print("Async2 dispatch")
-//        test2.start()
-//    }
-//}
+//opQueue.addOperations([test1, test2], waitUntilFinished: true)
+print("Finished state: ", test1.isFinished, test1.isReady, test1.isExecuting, test1.isCancelled)
 
+opQueue.addOperation {
+    DispatchQueue.main.async {
+        print("Async1 dispatch")
+        test1.start()
+    }
+
+}
+opQueue.addOperation {
+    DispatchQueue.main.async {
+        print("Async2 dispatch")
+        test2.start()
+    }
+}
+print(opQueue.maxConcurrentOperationCount)
 opQueue.maxConcurrentOperationCount = 1
+print(opQueue.maxConcurrentOperationCount)
 
 class AsyncOperation : Operation {
   enum State{
     case Waiting, Executing, Finished
   }
-  
   
   var state = State.Waiting{
     willSet{

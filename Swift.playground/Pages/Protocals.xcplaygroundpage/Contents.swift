@@ -166,10 +166,13 @@ protocol existing {
 }
 
 class existing2: existing {
+    let ex : existing.Type = existing2.self
     func exit() {
         print("existing3")
     }
 }
+
+
 
 class existing3 : existing2 {
     override func exit(){

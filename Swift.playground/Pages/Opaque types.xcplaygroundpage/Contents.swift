@@ -148,20 +148,24 @@ func temp () -> Int {
 //stepCount()
 
 var tempvar = 10
+var escClo: (Int) -> Void = {s1 in}
 var clo: (Int) -> Void = { s1 in
     var s2 = s1
     s2 += tempvar
-    print(s1)
+    print(s2)
 }
 
 
 
-func cloCheck (_ clo: /*@escaping*/ (Int) -> Void, _ temp: inout Int) {
-    clo(temp)
-//    escClo = clo
+func cloCheck (_ clo: @escaping (Int) -> Void, _ temp: Int) {
+//    clo(temp)
+    escClo = clo
 }
 
-cloCheck(clo, &tempvar)
+print("check")
+
+cloCheck(clo, tempvar)
+escClo(tempvar)
 
 
 

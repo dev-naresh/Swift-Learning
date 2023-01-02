@@ -17,5 +17,6 @@
         <page name='Async'/>
         <page name='Multithreading'/>
         <page name='OperationQueue'/>
+        <page name='dsafz'/>
     </pages>
 </playground>
