@@ -35,8 +35,8 @@ func errCheck(_ num: Int) throws -> Int {
 }
 
 do{
-    try errCheck(1)
-//    try errCheck(-1)
+//    try errCheck(1)
+    try errCheck(-1)
 }
 var f = try? errCheck(1)
 print(f ?? 0)
@@ -77,31 +77,45 @@ class AM<U> {
 var am: AM = AM<Int>()
 am.gen1(a: 33)
 
-class A {
-    var a: Int
-    weak var b: B?
-    
-    init(_ a: Int) {
-        self.a = a
-    }
+//class A {
+//    var a: Int
+//    weak var b: B?
+//
+//    init(_ a: Int) {
+//        self.a = a
+//    }
+//}
+//
+//class B {
+//    var b: Int
+//    var a: A?
+//
+//    init(_ b: Int) {
+//        self.b = b
+//    }
+//}
+
+//var aA: A = A(9)
+//var bB: B? = B(10)
+
+//aA.b = bB
+//bB?.a = aA
+//
+//bB = nil
+
+var testClo: () -> Void = {}
+func test(_ clo: @escaping () -> Void) {
+    testClo = clo
 }
 
-class B {
-    var b: Int
-    var a: A?
-    
-    init(_ b: Int) {
-        self.b = b
-    }
+test() {
+    print("escaping closure")
 }
 
-var aA: A = A(9)
-var bB: B? = B(10)
+testClo()
 
-aA.b = bB
-bB?.a = aA
 
-bB = nil
+  
 
 
 //: [Next](@next)
