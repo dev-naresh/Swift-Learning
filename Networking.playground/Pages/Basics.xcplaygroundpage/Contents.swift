@@ -1,5 +1,6 @@
 import Cocoa
 //import Combine
+import CommonCrypto
 
 var jsonData: Data?
 
@@ -9,26 +10,25 @@ struct Test: Codable {
 //    var email: String
 //    var name: String
 //    var body: String
-//    var msg: String
-    var base: String
+    var msg: String
+//    var base: String
     
     enum CodingKeys: String, CodingKey {
-//        case msg = "msgtxt"
-        case base = "baseURL"
+        case msg = "msgtxt"
+//        case base = "baseURL"
     }
 }
-//class s {
-//
-//}
 
 func getPosts() {
 //    63bfdef501a72b59f248a4e3
-    guard let url = URL(string: "https://run.mocky.io/v3/75390a47-07c3-4bcb-8ae7-b2cb14cf3ce7?") else {
+    guard let url = URL(string: "http://demo8925853.mockable.io/") else {
         print("Invalid link...")
         return
     }
     var req = URLRequest(url: url)
 //    req.allHTTPHeaderFields = ["X-Master-Key":"$2b$10$tJwbePxDZPklOJ4xffLoxeWQ.JkRAYdaObwskSbyzKzRTYoSa8qHK"]
+//    req.allHTTPHeaderFields = ["userName":"asdf@asdf.com", "password": "1234567890"]
+    req.setValue("Basic asdf@asdf.com:1234567890", forHTTPHeaderField: "Authorization")
     req.httpMethod = "GET"
     
     var session = URLSession.shared.dataTask(with: req) {
@@ -46,7 +46,7 @@ func getPosts() {
             if let data = data {
                 //                print(type(of: data))
                 //                jsonData = data
-                //                print(try? JSONSerialization.jsonObject(with: data))
+//                                print(try? JSONSerialization.jsonObject(with: data))
                 do {
                     var testObj = try JSONDecoder().decode(Test.self, from: data)
                     print(testObj)
@@ -58,7 +58,7 @@ func getPosts() {
                 //                    print(obj)
                 //                }
                 //                debugPrint(testObj)
-                print(jsonData ?? "")
+//                print(jsonData ?? "")
                 //                let resData = try! JSONSerialization.jsonObject(with: data, options: .mutableContainers)
                 ////                let result = resData as! Dictionary <String , Any>
                 //                print(resData)
@@ -69,7 +69,7 @@ func getPosts() {
     session.resume()
 }
 
-getPosts()
+//getPosts()
 
 struct Employee: Codable {
     var name: String
@@ -82,7 +82,7 @@ func postPosts() {
         "Role": "Developer"
     ]
     
-    guard let url = URL(string: "https://api.jsonbin.io/v3/b") else {
+    guard let url = URL(string: "https://postman-echo.com/post") else {
         print("Invalid link...")
         return
     }
@@ -90,11 +90,11 @@ func postPosts() {
     var req = URLRequest(url: url)
     req.httpMethod = "POST"
     req.setValue("Application/json", forHTTPHeaderField: "Content-Type")
-    req.httpBody = try? JSONEncoder().encode(Employee(name: "Naresh", role: "Developer"))
+    req.httpBody = try? JSONEncoder().encode(Test(msg: "Hello, I'm a Developer."))
 //    req.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: [])
 //    req.httpBody = try? JSONEncoder().encode(parameter)
 //    req.allHTTPHeaderFields = ["X-Api-Key":"PMAK-63c678bd54f0fb5b737ec3a9-dd53b9455cd2dda094df9bf13b04b64fa3"]
-    req.allHTTPHeaderFields = ["X-Master-Key":"$2b$10$tJwbePxDZPklOJ4xffLoxeWQ.JkRAYdaObwskSbyzKzRTYoSa8qHK"]
+//    req.allHTTPHeaderFields = ["X-Master-Key":"$2b$10$tJwbePxDZPklOJ4xffLoxeWQ.JkRAYdaObwskSbyzKzRTYoSa8qHK"]
     
     var session = URLSession.shared.dataTask(with: req) {
         data, response, error in
@@ -109,7 +109,7 @@ func postPosts() {
             DispatchQueue.main.sync{
                 if let data = data {
                     let resData = (try? JSONSerialization.jsonObject(with: data, options: [])) as? Dictionary <String , Any>
-                    print(resData?["record"] ?? "Nil value", Thread.isMainThread)
+                    print(resData?["data"] ?? "Nil value")
                 }
             }
         }
@@ -118,7 +118,7 @@ func postPosts() {
     session.resume()
 }
 
-postPosts()
+//postPosts()
 
 func putPosts() {
     let parameter = [
@@ -202,8 +202,8 @@ class DownloadImage: NSObject, URLSessionDownloadDelegate {
         downloadObj?.earliestBeginDate = Date().addingTimeInterval(5)
         
         downloadObj?.resume()
-    }download["txt"]?.pause()
-    download["video"]?.pause()
+    }
+    
     func pause() {
         downloadObj?.cancel { [weak self]
             resumeDataOrNil in
@@ -229,6 +229,7 @@ class DownloadImage: NSObject, URLSessionDownloadDelegate {
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         print("Downloading...")
+        print(Thread.isMainThread)
         try? FileManager.default.moveItem(at: location, to: self.filePath!)
         
 //        print(session)
@@ -238,7 +239,7 @@ class DownloadImage: NSObject, URLSessionDownloadDelegate {
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
         let progress = Int(Float(totalBytesWritten) / Float(totalBytesExpectedToWrite) * 100)
-        print("Downloading: \(progress)%")
+        print("Downloading: \(progress)%", Thread.isMainThread)
     }
     
 }
@@ -250,19 +251,19 @@ let textURL = "https://jsonplaceholder.typicode.com/posts"
 let videoURL = "https://s32.uptofiles.net/files/Tamil%20HD%20Mobile%20Movies/Vikram%20(1986)/Vikram%20(Original)/Vikram%20(640x360)/Vikram%201986%20HD%20Sample.mp4"
 
 
-var download: [String: DownloadImage] = ["img": DownloadImage(imageURL, "Images/hd.jpg"), "txt": DownloadImage(textURL, "Images/json.txt"), "video": DownloadImage(videoURL, "Images/hd2.mp4")]
+//var download: [String: DownloadImage] = ["img": DownloadImage(imageURL, "Images/hd.jpg"), "txt": DownloadImage(textURL, "Images/json.txt"), "video": DownloadImage(videoURL, "Images/hd2.mp4")]
 
-download["img"]?.downloader()
-download["txt"]?.downloader()
-download["video"]?.downloader()
-download["img"]?.pause()
-download["txt"]?.pause()
-download["video"]?.pause()
-download["img"]?.resume()
-download["video"]?.resume()
-download["txt"]?.resume()
-download["img"]?.pause()
-download["img"]?.resume()
+//download["img"]?.downloader()
+//download["txt"]?.downloader()
+//download["video"]?.downloader()
+//download["img"]?.pause()
+//download["txt"]?.pause()
+//download["video"]?.pause()
+//download["img"]?.resume()
+//download["video"]?.resume()
+//download["txt"]?.resume()
+//download["img"]?.pause()
+//download["img"]?.resume()
 
 //
 //download["img"]?.resume()
@@ -314,7 +315,6 @@ class UploadImage: NSObject, URLSessionDelegate, URLSessionTaskDelegate {
         req.allHTTPHeaderFields = ["X-Master-Key":"$2b$10$tJwbePxDZPklOJ4xffLoxeWQ.JkRAYdaObwskSbyzKzRTYoSa8qHK"]
         req.httpMethod = "POST"
         req.setValue("Application/json", forHTTPHeaderField: "Content-Type")
-        
         
         let data = try? JSONSerialization.data(withJSONObject: parameter)
 //        let session = URLSession.shared.downloadTask(with: url) {
@@ -373,7 +373,184 @@ class UploadImage: NSObject, URLSessionDelegate, URLSessionTaskDelegate {
     
 }
 
-var upload =  UploadImage()
+//var upload =  UploadImage()
 
 //upload.uploader()
 //upload.pause()
+
+
+
+//"https://accounts.google.com/v3/signin/identifier?dsh=S872581764%3A1674206652241309&authuser=0&continue=https%3A%2F%2Fmyaccount.google.com%2F&ec=GAlAwAE&hl=en&service=accountsettings&flowName=GlifWebSignIn&flowEntry=AddSession"
+
+//"https://accounts.google.com/v3/signin/challenge/pwd?TL=AC7eWV3mtlUjOvV-QguB2X2nueHqCM4wP60LjHxZhkXuFGBNHwa1NUq3yoYfE5AY&checkConnection=youtube%3A222%3A0&checkedDomains=youtube&cid=2&continue=https%3A%2F%2Fmyaccount.google.com%2F&dsh=S872581764%3A1674206652241309&flowEntry=AddSession&flowName=GlifWebSignIn&hl=en&pstMsg=1&service=accountsettings&authuser=0"
+
+
+//"https://mockapi.io/login"
+//"ddasfasf@asdfsafs.com"
+
+
+
+extension Data {
+    var hexString: String {
+        return map { String(format: "%02hhx", $0) }.joined()
+    }
+
+    var sha256: Data {
+        var digest = [UInt8](repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH))
+        self.withUnsafeBytes({
+            _ = CC_SHA256($0, CC_LONG(self.count), &digest)
+        })
+        return Data(bytes: digest)
+    }
+}
+
+extension String {
+    func sha256(salt: String) -> Data {
+        return (self + salt).data(using: .utf8)!.sha256
+    }
+
+}
+
+
+class Auth: NSObject, URLSessionDelegate {
+//    var data: NSMutableData = NSMutableData()
+    var isSigningIn: Bool?
+    var urlComponent = URLComponents()
+    lazy var session = URLSession(configuration: .default, delegate: self, delegateQueue: .main)
+    
+    func authPostPosts() {
+        let hash = "test".sha256(salt: "salt").hexString
+        print(hash)
+
+        urlComponent.scheme = "https"
+        urlComponent.host = "postman-echo.com"
+        urlComponent.path = "/basic-auth"
+        
+        let username = "postman"
+        let password = "password"
+        urlComponent.user = username
+        urlComponent.password = password
+        urlComponent.queryItems = [URLQueryItem(name: "name", value: "falsdfj"),URLQueryItem(name: "name", value: "falsdfj")]
+        let loginString = String(format: "%@:%@", username, password)
+        let loginData = loginString.data(using: String.Encoding.utf8)!
+        let base64LoginString = loginData.base64EncodedString()
+        print(loginString,":",base64LoginString)
+
+        guard let url = urlComponent.url else {
+            print("Invalid link...")
+            return
+        }
+        
+        print(url)
+        var req = URLRequest(url: url)
+        req.httpMethod = "GET"
+//        req.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
+//        req.setValue("Bearer \(hash)", forHTTPHeaderField: "Authorization")
+        
+        isSigningIn = true
+
+        URLSession.shared.dataTask(with: req) {
+            data, response, error in
+            
+            let resResult = response as? HTTPURLResponse
+            print(HTTPURLResponse.localizedString(forStatusCode: resResult!.statusCode))
+            print("Status code:",resResult?.statusCode ?? 0)
+
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+//                print(data!)
+                DispatchQueue.main.sync{
+                    if let data = data {
+                        let resData = (try? JSONSerialization.jsonObject(with: data, options: []))
+                        print(resData ?? "Nil")
+//                        print(resData?["name"] ?? "Nil value", Thread.isMainThread)
+                    }
+                }
+            }
+//            DispatchQueue.main.async {
+//                self?.isSigningIn = false
+//                if let data = data {
+//                    print(data)
+//                }
+//            }
+        }.resume()
+            
+        //    req.httpBody = try? JSONEncoder().encode(Employee(name: "Naresh", role: "Developer"))
+        //    req.httpBody = try? JSONSerialization.data(withJSONObject: parameter, options: [])
+        //    req.httpBody = try? JSONEncoder().encode(parameter)
+        //    req.allHTTPHeaderFields = ["X-Api-Key":"PMAK-63c678bd54f0fb5b737ec3a9-dd53b9455cd2dda094df9bf13b04b64fa3"]
+        //    req.allHTTPHeaderFields = ["X-Master-Key":"$2b$10$tJwbePxDZPklOJ4xffLoxeWQ.JkRAYdaObwskSbyzKzRTYoSa8qHK"]
+        
+//        var session = URLSession.shared.dataTask(with: req) {
+//            data, response, error in
+//            let resResult = response as? HTTPURLResponse
+//
+//            print(HTTPURLResponse.localizedString(forStatusCode: resResult!.statusCode))
+//            print("Status code:",resResult?.statusCode ?? 0)
+//
+//            if let error = error {
+//                print(error.localizedDescription)
+//            } else {
+//                DispatchQueue.main.sync{
+//                    if let data = data {
+//                        let resData = (try? JSONSerialization.jsonObject(with: data, options: [])) as? Dictionary <String , Any>
+//                        print(resData?["record"] ?? "Nil value", Thread.isMainThread)
+//                    }
+//                }
+//            }
+//        }
+        
+//        session.resume()
+    }
+}
+
+var auth = Auth()
+auth.authPostPosts()
+
+//print(Int(CC_SHA1_DIGEST_LENGTH))
+
+//
+//let username = "user"
+//let password = "pass"
+//let loginString = String(format: "%@:%@", username, password)
+//let loginData = loginString.data(using: String.Encoding.utf8)!
+//let base64LoginString = loginData.base64EncodedString()
+//
+//// create the request
+//let url = URL(string: "http://www.example.com/")!
+//var request = URLRequest(url: url)
+//request.httpMethod = "POST"
+//request.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
+//
+//// fire off the request
+//// make sure your class conforms to NSURLConnectionDelegate
+//let urlConnection = NSURLConnection(request: request, delegate: self)
+
+
+//extension Data {
+//
+//    var hexString: String {
+//        return map { String(format: "%02hhx", $0) }.joined()
+//    }
+//
+//    var sha256: Data {
+//        var digest = [UInt8](repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH))
+//        self.withUnsafeBytes({
+//            _ = CC_SHA256($0, CC_LONG(self.count), &digest)
+//        })
+//        return Data(bytes: digest)
+//    }
+//
+//}
+//
+//extension String {
+//
+//    func sha256(salt: String) -> Data {
+//        return (self + salt).data(using: .utf8)!.sha256
+//    }
+//
+//}
+//
+//let hash = "test".sha256(salt: "salt").hexString
+//print(hash)
